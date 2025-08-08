@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>로티 테스트</title>
+    <style>
+      /* Font */
+      @font-face {
+        font-family: "Pretendard";
+        font-weight: 400;
+        font-style: normal;
+        src: url("../fonts/Pretendard-Regular.woff2") format("font-woff2"), url("../fonts/Pretendard-Regular.woff") format("woff");
+      }
+      @font-face {
+        font-family: "Pretendard";
+        font-weight: 500;
+        font-style: normal;
+        src: url("../fonts/Pretendard-Medium.woff2") format("font-woff2"), url("../fonts/Pretendard-Medium.woff") format("woff");
+      }
+      @font-face {
+        font-family: "Pretendard";
+        font-weight: 600;
+        font-style: normal;
+        src: url("../fonts/Pretendard-SemiBold.woff2") format("font-woff2"), url("../fonts/Pretendard-SemiBold.woff") format("woff");
+      }
+      /* Reset */
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed, 
+      figure, figcaption, footer, header, hgroup, 
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+      }
+      article, aside, details, figcaption, figure, 
+      footer, header, hgroup, menu, nav, section {
+        display: block;
+      }
+      ol, ul {
+        list-style: none;
+      }
+      blockquote, q {
+        quotes: none;
+      }
+      blockquote:before, blockquote:after,
+      q:before, q:after {
+        content: '';
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      button{
+        background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer
+      }
+      /* Layout */
+      body {
+        background: #111;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        font-family: "Pretendard", AppleGothic, "Malgun Gothic", "Dotum", sans-serif;
+      }
+      .wrap {
+        position: relative;
+        width: 1280px;
+        height: 800px;
+        background-color: #fff;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 30px;
+        align-items: center;
+        color: #555;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -1.08px;
+      }
+      .top .timer {
+        display: flex;
+        gap: 10px;
+      }
+      .top button {
+        display: flex; 
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 20px;
+        background: #F0F0F0;
+        color: #555;
+        text-align: center;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -1.08px;
+      }
+      .txt {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        text-align: center;
+      }
+      .txt p {
+        color: #0078c7;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -1.2px;
+      }
+      .txt span {
+        color: #222;
+        font-family: Pretendard;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -1.5px;
+      }
+      .motion {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        align-items: flex-end;
+      }
+      #lottie1.lottie-container {
+        width: 640px;
+        height: 475px;
+      }
+      #lottie2.lottie-container {
+        width: 640px;
+        height: 475px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div class="timer"><img src="./timer.svg" alt="">30초</div>
+        <button><img src="./scan.svg" alt="">QR결제</button>
+      </div>
+      <div class="txt">
+        <p>결제금액 300,000원</p>
+        <span>카드나 휴대폰으로 결제해주세요</span>
+      </div>
+      <div class="motion">
+        <div id="lottie1" class="lottie-container"></div>
+        <div id="lottie2" class="lottie-container"></div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script>
+      function loadLottie(id, jsonPath) {
+        fetch(jsonPath)
+          .then((res) => res.json())
+          .then((data) => {
+            lottie.loadAnimation({
+              container: document.getElementById(id),
+              renderer: "svg",
+              loop: true,
+              autoplay: true,
+              animationData: data,
+            });
+          });
+      }
+
+      loadLottie("lottie1", "card.json");
+      loadLottie("lottie2", "mobile.json");
+    </script>
+  </body>
+</html>
